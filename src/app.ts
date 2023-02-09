@@ -2,6 +2,8 @@ import express, { Application } from "express";
 import ip from "ip";
 import cors from "cors";
 
+import {Code} from "../src/enum/code.enum";
+
 export class App {
     private readonly app: Application;
     private readonly APPLICATION_RUNNING = "Application running on";
@@ -25,7 +27,7 @@ export class App {
     }
     private routes() {
         this.app.use('/patients', (req, res) => {})
-        this.app.get('/', (req, res) => res.status(200).send({message: 'Server is up now'}))
-        this.app.all('*', (req, res) => res.status(404).send({message: this.ROUTE_NOT_FOUND}))
+        this.app.get('/', (req, res) => res.status(Code.OK).send({message: 'Server is up now'}))
+        this.app.all('*', (req, res) => res.status(Code.NOT_FOUND).send({message: this.ROUTE_NOT_FOUND}))
     }
 }
