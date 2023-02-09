@@ -1,8 +1,11 @@
-import express, { Application } from "express";
+import express, { Application, Request, Response } from "express";
 import ip from "ip";
 import cors from "cors";
 
-import {Code} from "../src/enum/code.enum";
+import {Code} from '../src/enum/code.enum';
+import {Status} from '../src/enum/status.enum';
+import { HttpResponse } from './domain/response';
+import  patientRoutes from '../src/routes/patient.routes'
 
 export class App {
     private readonly app: Application;
@@ -26,8 +29,8 @@ export class App {
      this.app.use(express.json())
     }
     private routes() {
-        this.app.use('/patients', (req, res) => {})
-        this.app.get('/', (req, res) => res.status(Code.OK).send({message: 'Server is up now'}))
-        this.app.all('*', (req, res) => res.status(Code.NOT_FOUND).send({message: this.ROUTE_NOT_FOUND}))
+        this.app.use('/patients', patientRoutes)
+        this.app.get('/', (req: Request, res: Response) => res.status(Code.OK).send(new HttpResponse(Code.OK, Status.OK, "This is api v1.0")));
+        this.app.all('*', (req: Request, res: Response) => res.status(Code.NOT_FOUND).send(new HttpResponse(Code.NOT_FOUND, Status.NOT_FOUND, this.ROUTE_NOT_FOUND)))
     }
 }
