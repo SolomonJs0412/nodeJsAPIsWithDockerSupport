@@ -19,7 +19,6 @@ export class App {
     }
 
     listen(): void {
-
     this.app.listen(this.port);
     console.info(`${this.APPLICATION_RUNNING} ${ip.address()}:${this.port}`)
  }
@@ -30,7 +29,9 @@ export class App {
     }
     private routes() {
         this.app.use('/patients', patientRoutes)
-        this.app.get('/', (req: Request, res: Response) => res.status(Code.OK).send(new HttpResponse(Code.OK, Status.OK, "This is api v1.0")));
-        this.app.all('*', (req: Request, res: Response) => res.status(Code.NOT_FOUND).send(new HttpResponse(Code.NOT_FOUND, Status.NOT_FOUND, this.ROUTE_NOT_FOUND)))
+        this.app.get('/', (req: Request, res: Response) => 
+            res.status(Code.OK).send(new HttpResponse(Code.OK, Status.OK, "This is api v1.0")));
+        this.app.all('*', (req: Request, res: Response) => 
+            res.status(Code.NOT_FOUND).send(new HttpResponse(Code.NOT_FOUND, Status.NOT_FOUND, this.ROUTE_NOT_FOUND)))
     }
 }
