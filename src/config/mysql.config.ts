@@ -11,6 +11,5 @@ export const connection = async () => {
         port: 3306 || process.env.DB_PORT,
         connectionLimit: 20 || process.env.DB_CONNECTION_LIMIT
     })
-    console.log("Connection database successfully")
     return pool;
 }

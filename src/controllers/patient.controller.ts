@@ -7,11 +7,12 @@ import { Code } from "../enum/code.enum";
 import { Status } from "../enum/status.enum";
 import { HttpResponse } from '../domain/response';
 import { FieldPacket, OkPacket, ResultSetHeader, RowDataPacket } from "mysql2";
+import {ErrorHandler} from "../utils/errorHandler.config"
 
 type ResultSet = [RowDataPacket[] | RowDataPacket[][] | OkPacket | OkPacket[] | ResultSetHeader, FieldPacket[]];
 
 //get all patients from database
-export const getPatients = async (req: Request, res: Response): Promise<Response<Patient[]>> => {
+export const getPatients = async (req: Request, res: Response): Promise<Response<HttpResponse>> => {
     console.info(`[${new Date().toLocaleString()}] Incoming ${req.method}${req.originalUrl} request from ${req.rawHeaders[0]}${req.rawHeaders[1]}`);
     try {
         const pool = await connection(); 
@@ -26,7 +27,7 @@ export const getPatients = async (req: Request, res: Response): Promise<Response
 }
 
 //get single patient from database
-export const getPatient = async (req: Request, res: Response): Promise<Response<Patient[]>> => {
+export const getPatient = async (req: Request, res: Response): Promise<Response<HttpResponse>> => {
     console.info(`[${new Date().toLocaleString()}] Incoming ${req.method}${req.originalUrl} request from ${req.rawHeaders[0]}${req.rawHeaders[1]}`);
     try {
         const pool = await connection(); 
@@ -47,7 +48,7 @@ export const getPatient = async (req: Request, res: Response): Promise<Response<
 }
 
 //create patient
-export const createPatient = async (req: Request, res: Response): Promise<Response<Patient>> => {
+export const createPatient = async (req: Request, res: Response): Promise<Response<HttpResponse>> => {
     console.info(`[${new Date().toLocaleString()}] Incoming ${req.method}${req.originalUrl} request from ${req.rawHeaders[0]}${req.rawHeaders[1]}`);
     let patientValue: Patient = {...req.body};
     try {
@@ -64,7 +65,7 @@ export const createPatient = async (req: Request, res: Response): Promise<Respon
 }
 
 //update patient
-export const updatePatient = async (req: Request, res: Response): Promise<Response<Patient[]>> => {
+export const updatePatient = async (req: Request, res: Response): Promise<Response<HttpResponse>> => {
     console.info(`[${new Date().toLocaleString()}] Incoming ${req.method}${req.originalUrl} request from ${req.rawHeaders[0]}${req.rawHeaders[1]}`);
     let patientValue: Patient = {...req.body};
     try {
@@ -87,7 +88,7 @@ export const updatePatient = async (req: Request, res: Response): Promise<Respon
 }
 
 //delete patient
-export const deletePatient = async (req: Request, res: Response): Promise<Response<Patient[]>> => {
+export const deletePatient = async (req: Request, res: Response): Promise<Response<HttpResponse>> => {
     console.info(`[${new Date().toLocaleString()}] Incoming ${req.method}${req.originalUrl} request from ${req.rawHeaders[0]}${req.rawHeaders[1]}`);
     try {
         const pool = await connection(); 
