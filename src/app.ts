@@ -2,10 +2,10 @@ import express, { Application, Request, Response } from "express";
 import ip from "ip";
 import cors from "cors";
 
-import {Code} from '../src/enum/code.enum';
-import {Status} from '../src/enum/status.enum';
+import {Code} from './enum/code.enum';
+import {Status} from './enum/status.enum';
 import { HttpResponse } from './domain/response';
-import  patientRoutes from '../src/routes/patient.routes'
+import  patientRoutes from './routes/patient.routes'
 
 export class App {
     private readonly app: Application;
