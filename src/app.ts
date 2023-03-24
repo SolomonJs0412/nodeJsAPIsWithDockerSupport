@@ -35,3 +35,4 @@ export class App {
             res.status(Code.NOT_FOUND).send(new HttpResponse(Code.NOT_FOUND, Status.NOT_FOUND, this.ROUTE_NOT_FOUND)))
     }
 }
+
